@@ -20,5 +20,5 @@ jobs:
 
     - name: Run tests inside Docker
       run: |
-        docker run --rm my-inference-model-git pytest tests_git_action/
+        docker run --rm inference-model-git pytest tests_git_action/
       # Or if no tests yet, you can run a simple inference script to validate
