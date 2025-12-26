@@ -10,7 +10,7 @@ RUN python3.10 -m pip install --no-cache-dir -r requirements.txt
 RUN pip install pytest
 
 # Set the CMD to your handler function (module.function)
-CMD ["pytest","lambda_handler.handler"]
+CMD ["lambda_handler.handler"]
 
 
 #################### testing################

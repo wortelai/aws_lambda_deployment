@@ -15,10 +15,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build Docker image
-      run: docker build -t inference-model-git .
+    - name: Build Docker image for test
+      run: docker build -t inference-model-test -f Dockerfile.test.
 
     - name: Run tests inside Docker
       run: |
-        docker run --rm inference-model-git pytest tests_git_action/
+        docker run --rm inference-model-test pytest tests_git_action/
       # Or if no tests yet, you can run a simple inference script to validate

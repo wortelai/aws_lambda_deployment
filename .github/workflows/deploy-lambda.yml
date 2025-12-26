@@ -29,7 +29,7 @@ jobs:
 
     - name: Tag Docker image
       run: |
-        docker tag inference-model-git:latest-git ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git
+        docker tag inference-model-git:latest ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git
 
     - name: Push Docker image to Amazon ECR
       run: |
