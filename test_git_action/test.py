@@ -8,7 +8,7 @@ def test_model_loads():
 
 def test_predict_on_sample_image():
     # Read sample image and convert to base64
-    with open("test_img.jpg", "rb") as f:
+    with open("./test_inference/test_img.jpg", "rb") as f:
         img_b64 = base64.b64encode(f.read()).decode("utf-8")
 
     # Initialize model
