@@ -38,7 +38,7 @@ jobs:
     - name: Update Lambda function
       run: |
         aws lambda update-function-code --function-name cabbage-inference-lambda \
-          --image-uri ${{ steps.ecr-login.outputs.registry }}/inference-model-git:latest-git
+          --image-uri ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git
 
 
     # - name: Create or Update Lambda
