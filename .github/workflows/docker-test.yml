@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Build Docker image for test
-      run: docker build -t inference-model-test -f Dockerfile.test.
+      run: docker build -t inference-model-test -f Dockerfile.test .
 
     - name: Run tests inside Docker
       run: |
