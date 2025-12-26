@@ -35,7 +35,26 @@ jobs:
       run: |
         docker push ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git
 
-    - name: Update Lambda function
+    # - name: Update Lambda function
+    #   run: |
+    #     aws lambda update-function-code --function-name inference-lambda-git \
+    #       --image-uri ${{ steps.ecr-login.outputs.registry }}/inference-model-git:latest-git
+
+
+    - name: Create or Update Lambda
       run: |
-        aws lambda update-function-code --function-name inference-lambda-git \
-          --image-uri ${{ steps.ecr-login.outputs.registry }}/inference-model-git:latest-git
+        aws lambda get-function --function-name inference-lambda-git \
+        && aws lambda update-function-code \
+          --function-name cabbage-inference-lambda \
+          --image-uri ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git \
+         || aws lambda create-function \
+          --function-name cabbage-inference-lambda \
+          --package-type Image \
+          --code ImageUri=${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git \
+          --role arn:aws:iam::173778668309:role/lambda-exec-role \
+          --memory-size 2048 \
+          --timeout 180 \
+          --region us-east-1
+
+
+
