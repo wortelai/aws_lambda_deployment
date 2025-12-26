@@ -4,6 +4,9 @@ WORKDIR /app
 COPY . /app
 
 RUN python3.10 -m pip install --upgrade pip
+RUN apt-get update && apt-get install -y execstack
+RUN execstack -c /usr/local/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.cpython-310-x86_64-linux-gnu.so
+
 RUN python3.10 -m pip install --no-cache-dir -r requirements.txt
 RUN pip install pytest
 
