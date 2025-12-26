@@ -3,7 +3,7 @@ import os
 from inference import ModelWrapper
 
 MODEL_PATH = "./latest.onnx"
-TEST_IMAGE_PATH = "./test_inference/test_img.jpg"
+TEST_IMAGE_PATH = "/test_img.jpg"
 
 def test_model_loads():
     assert os.path.exists(MODEL_PATH), "ONNX model file not found"
