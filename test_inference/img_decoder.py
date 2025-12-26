@@ -1,6 +1,6 @@
 import json
 import base64
-
+import os
 def save_base64_image_from_nested_json(json_path, output_image_name):
     # Step 1: load outer JSON
     with open(json_path, "r") as f:
@@ -23,7 +23,7 @@ def save_base64_image_from_nested_json(json_path, output_image_name):
     with open(output_image_name, "wb") as img_file:
         img_file.write(img_bytes)
 
-    print(f"Image saved as {output_image_name}")
+    print(f"Image saved as {os.path.abspath(output_image_name)}")
 
 # Example usage:
-save_base64_image_from_nested_json("/opt/workspace_daniyal/ML_model_deploy/aws_lambda/output_base64.json", "output_image.jpg")
+save_base64_image_from_nested_json("/opt/workspace_daniyal/ML_model_deploy/aws_lambda/output_base64.json", "output_image1.jpg")
