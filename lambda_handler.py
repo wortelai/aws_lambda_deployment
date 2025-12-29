@@ -2,7 +2,7 @@ import json
 from inference import ModelWrapper
 
 # Load model once globally (for cold start optimization)
-model_wrapper = ModelWrapper("./latest.onnx", score_thr=0.15)
+model_wrapper = ModelWrapper("latest.onnx", score_thr=0.15)
 
 def handler(event, context):
     try:
