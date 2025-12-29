@@ -1,13 +1,24 @@
 FROM python:3.10-slim
 
 WORKDIR /app
-COPY . /app
 
-RUN python3.10 -m pip install --upgrade pip
-RUN apt-get update && apt-get install -y execstack
-RUN execstack -c /usr/local/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.cpython-310-x86_64-linux-gnu.so
+# System dependencies
+RUN apt-get update && apt-get install -y execstack \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN python3.10 -m pip install --no-cache-dir -r requirements.txt
-RUN pip install pytest
+# Copy only requirements first (better caching)
+COPY requirements.txt .
 
-CMD ["pytest", "tests_git_action/"]
+RUN python -m pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt \
+    && pip install pytest
+
+# Fix onnxruntime executable stack issue
+RUN execstack -c \
+    /usr/local/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_pybind11_state*.so
+
+# Now copy the rest of the code
+COPY . .
+
+# Default command
+CMD ["pytest", "test_git_action/"]
