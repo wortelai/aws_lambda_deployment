@@ -1,24 +1,17 @@
-FROM python:3.10-slim
+FROM public.ecr.aws/lambda/python:3.10
 
 WORKDIR /app
 
-# System dependencies
-RUN apt-get update && apt-get install -y execstack \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy only requirements first (better caching)
+# Copy requirements first
 COPY requirements.txt .
 
 RUN python -m pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install pytest
 
-# Fix onnxruntime executable stack issue
-RUN execstack -c \
-    /usr/local/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_pybind11_state*.so
-
-# Now copy the rest of the code
+# Copy code
 COPY . .
 
-# Default command
+ENV PYTHONPATH=/app
+
 CMD ["pytest", "test_git_action/"]
