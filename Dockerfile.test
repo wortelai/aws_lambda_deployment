@@ -2,16 +2,14 @@ FROM public.ecr.aws/lambda/python:3.10
 
 WORKDIR /app
 
-# Copy requirements first
 COPY requirements.txt .
-
-RUN python -m pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt \
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt \
     && pip install pytest
 
-# Copy code
 COPY . .
 
 ENV PYTHONPATH=/app
 
+ENTRYPOINT []
 CMD ["pytest", "test_git_action/"]
