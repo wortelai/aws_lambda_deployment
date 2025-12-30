@@ -26,4 +26,4 @@ def save_base64_image_from_nested_json(json_path, output_image_name):
     print(f"Image saved as {os.path.abspath(output_image_name)}")
 
 # Example usage:
-save_base64_image_from_nested_json("/opt/workspace_daniyal/ML_model_deploy/aws_lambda/output_base64.json", "output_image1.jpg")
+save_base64_image_from_nested_json("/opt/workspace_daniyal/ML_model_deploy/aws_lambda/aws_lambda_deployment/test_inference/outtt.json", "output_image111.jpg")
