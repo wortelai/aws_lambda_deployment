@@ -44,7 +44,7 @@ jobs:
     - name: Create or Update Lambda
       run: |
         aws lambda create-function \
-          --function-name inference-model-gitaction \
+          --function-name inference-model-gitaction1 \
           --package-type Image \
           --code ImageUri=${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git \
           --role arn:aws:iam::173778668309:role/lambda-exec-role \
