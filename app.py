@@ -4,7 +4,7 @@ import cv2
 import requests
 
 # ---------------- CONFIG ----------------
-LAMBDA_URL = "http://localhost:9000/2015-03-31/functions/function/invocations"
+LAMBDA_URL = "https://4slyltmmgu7fb5dfhe6c6nrsjy0ocfni.lambda-url.us-east-1.on.aws/"
 INPUT_IMAGE = "/opt/workspace_daniyal/ML_model_deploy/aws_lambda/aws_lambda_deployment/test_git_action/test_img.jpg"
 OUTPUT_IMAGE = "output_with_boxes.jpg"
 # ----------------------------------------
@@ -63,7 +63,7 @@ def main():
         raise RuntimeError(f"Lambda error: {response.text}")
 
     result = response.json()
-    detections = json.loads(result["body"])["detections"]
+    detections = result["detections"]
 
     # Draw boxes
     image = draw_boxes(image, detections)
