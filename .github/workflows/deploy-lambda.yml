@@ -25,20 +25,20 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build Docker image
-      run: docker build --no-cache -t inference-model-git .
+      run: docker build --no-cache -t Updated_app .
 
     - name: Tag Docker image
       run: |
-        docker tag inference-model-git:latest ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git
+        docker tag Updated_app:latest ${{ steps.ecr-login.outputs.registry }}/my-inference-model:Updated_app
 
     - name: Push Docker image to Amazon ECR
       run: |
-        docker push ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest-git
+        docker push ${{ steps.ecr-login.outputs.registry }}/my-inference-model:Updated_app
 
     - name: Update Lambda function
       run: |
         aws lambda update-function-code --function-name inference-lambda11 \
-          --image-uri ${{ steps.ecr-login.outputs.registry }}/my-inference-model:latest1
+          --image-uri ${{ steps.ecr-login.outputs.registry }}/my-inference-model:Updated_app
 
 
     # - name: Create or Update Lambda

@@ -21,8 +21,7 @@ def test_predict_on_sample_image(mock_session):
         img_b64 = base64.b64encode(f.read()).decode("utf-8")
 
     model = ModelWrapper(MODEL_PATH)
-    img_b64_out, outputs = model.predict(img_b64)
+    outputs = model.predict(img_b64)
 
-    assert isinstance(img_b64_out, str)
-    assert len(img_b64_out) > 0
-    assert isinstance(outputs, (tuple, list))
+    assert isinstance(outputs, list)
+    assert all(isinstance(d, dict) for d in outputs)

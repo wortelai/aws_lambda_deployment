@@ -16,8 +16,8 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Build Docker image for test
-      run: docker build --no-cache -t inference-model-test -f Dockerfile.test .
+      run: docker build --no-cache -t Updated_app -f Dockerfile.test .
 
     - name: Run tests inside Docker
       run: |
-        docker run --rm -w /app -e PYTHONPATH=/app inference-model-test pytest test_git_action/
+        docker run --rm -w /app -e PYTHONPATH=/app Updated_app pytest test_git_action/
